@@ -1,4 +1,4 @@
-import { BaseTask } from '../models/baseTask.model.js';
+import { BaseTask } from '../models/baseTask.model.js'
 
 export const StatsService = {
   platformSummary: async () => {
@@ -21,6 +21,15 @@ export const StatsService = {
           },
         },
       },
-    ]);
+      {
+        $project: {
+          _id: 0,
+          platform: '$_id',
+          totalTasks: 1,
+          publishedTasks: 1,
+          totalPrice: 1,
+        },
+      },
+    ])
   },
-};
+}
