@@ -12,7 +12,6 @@ const baseTaskBody = z.object({
   assignedTo: z.string().min(1).optional(),
 })
 
-// Extend the base, ensuring each variant has a LITERAL value for 'platform'
 const RedditTaskSchema = baseTaskBody.extend({
   platform: z.literal('reddit'), // Must be this exact string
   threadUrl: z.url('threadUrl must be a valid URL'),

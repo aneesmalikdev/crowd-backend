@@ -14,10 +14,8 @@ export const auth =
 
       const decoded = jwt.verify(token, config.jwtSecret)
 
-      // attach user to request
       ;(req as any).user = decoded
 
-      // role-based check
       if (roles.length && !roles.includes((decoded as any).role)) {
         return res.status(403).json({ success: false, message: 'Forbidden: insufficient role' })
       }

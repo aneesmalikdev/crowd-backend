@@ -1,11 +1,12 @@
 import { BaseTask } from '../models/baseTask.model.js'
 import { getTaskModel } from '../models/getTaskModel.js'
+import { CreateTaskDTO, ListTaskQueryDTO, UpdateTaskDTO } from '../types/dtos/task.dto.js'
 
 export const TaskRepository = {
   // ------------------------------
   // CREATE (platform-specific)
   // ------------------------------
-  create: async (data) => {
+  create: async (data: CreateTaskDTO) => {
     const Model = getTaskModel(data.platform)
     return await Model.create(data)
   },
@@ -13,7 +14,7 @@ export const TaskRepository = {
   // ------------------------------
   // UPDATE (platform-specific)
   // ------------------------------
-  update: async (id, data) => {
+  update: async (id: string, data: UpdateTaskDTO) => {
     let Model = BaseTask
 
     // If platform is known, use the correct discriminator model
@@ -30,14 +31,14 @@ export const TaskRepository = {
   // ------------------------------
   // FIND BY ID (works on all)
   // ------------------------------
-  findById: async (id) => {
+  findById: async (id: string) => {
     return await BaseTask.findById(id)
   },
 
   // ------------------------------
   // LIST WITH FILTERS (base model)
   // ------------------------------
-  list: async (filters, page, limit) => {
+  list: async (filters: ListTaskQueryDTO, page: number, limit: number) => {
     const query = BaseTask.find(filters)
       .skip((page - 1) * limit)
       .limit(limit)

@@ -14,11 +14,12 @@ export interface CreateTaskDTO {
 }
 
 export interface UpdateTaskDTO {
+  platform: TaskPlatform
   status?: TaskStatus
   assignedTo?: string | null
   price?: number
 
-  // optional platform-specific updates
+  // platform-specific updates
   threadUrl?: string
   videoUrl?: string
   businessUrl?: string
